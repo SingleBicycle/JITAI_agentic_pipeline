@@ -184,3 +184,7 @@ datas/*/videos/*
 /outputs/*
 
 /test*
+
+# local brainstorming artifacts
+video-labeler/.superpowers/
+video-labeler/TASK.md
