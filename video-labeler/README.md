@@ -2,6 +2,8 @@
 
 Video Labeler is a small browser tool for stepping through a queue of public video URLs and saving timestamped labeling output to a folder on your machine. It can import multiple links at once, play one video at a time, capture markers, build `start`/`end` clips, and write `index.csv`, `meta.json`, and `labels.json` as you work.
 
+![Video Labeler demo](./demo-assets/demo.png)
+
 ## Quick Start
 
 From the `video-labeler/` folder:
