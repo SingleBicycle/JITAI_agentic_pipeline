@@ -1,0 +1,48 @@
+{
+  "global": {
+    "minimum_confidence": 0.45,
+    "risk_thresholds": {
+      "low": 0.35,
+      "medium": 0.6,
+      "high": 0.8
+    },
+    "max_actions_per_window": 1
+  },
+  "interventions": [
+    {
+      "id": "co_regulation",
+      "label": "Offer co-regulation support",
+      "tags": [
+        "co_regulation",
+        "distress",
+        "escalation"
+      ],
+      "min_urgency": "medium",
+      "cooldown_seconds": 45,
+      "instructions": "Move closer, reduce verbal load, and offer a calm co-regulation cue."
+    },
+    {
+      "id": "reduce_demands",
+      "label": "Reduce immediate task demands",
+      "tags": [
+        "reduce_demands",
+        "task_overload",
+        "avoidance"
+      ],
+      "min_urgency": "medium",
+      "cooldown_seconds": 60,
+      "instructions": "Briefly reduce task complexity or pause the demand before re-engaging."
+    },
+    {
+      "id": "repair_joint_attention",
+      "label": "Repair shared attention",
+      "tags": [
+        "repair_joint_attention",
+        "shared_attention_absent"
+      ],
+      "min_urgency": "low",
+      "cooldown_seconds": 30,
+      "instructions": "Re-enter the child’s focus with a simple shared-attention cue using an already salient object."
+    }
+  ]
+}

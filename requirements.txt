@@ -1,0 +1,16 @@
+lmdeploy
+numpy
+opencv-python
+bert-score
+coloredlogs
+json-repair
+qwen-vl-utils
+scikit-learn
+timm
+openai
+transformers
+tiktoken
+networkx
+Pillow
+tqdm
+torch

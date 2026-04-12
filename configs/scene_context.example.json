@@ -1,0 +1,13 @@
+{
+  "location": "home living room",
+  "participants": [
+    "child_1",
+    "caregiver_1"
+  ],
+  "activity": "play-based interaction",
+  "goal": "observe escalation risk and caregiver support opportunities",
+  "constraints": [
+    "human-in-the-loop review",
+    "no autonomous intervention"
+  ]
+}

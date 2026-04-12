@@ -1,0 +1,19 @@
+{
+  "child_id": "child_1",
+  "age_years": 6,
+  "communication_level": "short phrases",
+  "known_triggers": [
+    "high task demand",
+    "waiting without support",
+    "loud noise"
+  ],
+  "preferred_supports": [
+    "co-regulation",
+    "visual cue",
+    "reduced verbal load"
+  ],
+  "notes": [
+    "Caregiver-facing support only",
+    "Do not treat model outputs as diagnosis"
+  ]
+}
