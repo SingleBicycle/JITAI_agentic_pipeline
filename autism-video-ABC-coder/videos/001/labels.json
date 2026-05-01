@@ -1,0 +1,87 @@
+{
+  "videoIndex": "001",
+  "fileName": "video1.mp4",
+  "events": [
+    {
+      "id": "e1",
+      "startTimestampSeconds": 1.796985,
+      "endTimestampSeconds": 52.327163,
+      "createdAt": "2026-05-01T06:24:35.419Z",
+      "endedAt": "2026-05-01T06:25:25.940Z",
+      "segments": [
+        {
+          "id": "s1",
+          "tag": "antecedent",
+          "startTimestampSeconds": 3.612258,
+          "endTimestampSeconds": 6.087532,
+          "createdAt": "2026-05-01T06:24:37.225Z",
+          "endedAt": "2026-05-01T06:24:39.702Z"
+        },
+        {
+          "id": "s2",
+          "tag": "behavior",
+          "startTimestampSeconds": 6.087532,
+          "endTimestampSeconds": 18.674994,
+          "createdAt": "2026-05-01T06:24:39.702Z",
+          "endedAt": "2026-05-01T06:24:52.291Z"
+        },
+        {
+          "id": "s3",
+          "tag": "antecedent",
+          "startTimestampSeconds": 18.674994,
+          "endTimestampSeconds": 23.41193,
+          "createdAt": "2026-05-01T06:24:52.291Z",
+          "endedAt": "2026-05-01T06:24:57.027Z"
+        },
+        {
+          "id": "s4",
+          "tag": "behavior",
+          "startTimestampSeconds": 23.41193,
+          "endTimestampSeconds": 48.036051,
+          "createdAt": "2026-05-01T06:24:57.027Z",
+          "endedAt": "2026-05-01T06:25:21.656Z"
+        },
+        {
+          "id": "s5",
+          "tag": "antecedent",
+          "startTimestampSeconds": 48.036051,
+          "endTimestampSeconds": 50.40312,
+          "createdAt": "2026-05-01T06:25:21.656Z",
+          "endedAt": "2026-05-01T06:25:24.023Z"
+        },
+        {
+          "id": "s6",
+          "tag": "behavior",
+          "startTimestampSeconds": 50.40312,
+          "endTimestampSeconds": 52.327163,
+          "createdAt": "2026-05-01T06:25:24.023Z",
+          "endedAt": "2026-05-01T06:25:25.940Z"
+        }
+      ]
+    },
+    {
+      "id": "e2",
+      "startTimestampSeconds": 57.567827,
+      "endTimestampSeconds": 60.046803,
+      "createdAt": "2026-05-01T06:25:31.181Z",
+      "endedAt": "2026-05-01T06:25:36.121Z",
+      "segments": []
+    }
+  ],
+  "notes": [
+    {
+      "id": "n1",
+      "kind": "caption",
+      "timestampSeconds": 16.336442,
+      "text": "child looks confused and anxious",
+      "createdAt": "2026-05-01T06:24:49.951Z"
+    },
+    {
+      "id": "n2",
+      "kind": "caption",
+      "timestampSeconds": 43.534839,
+      "text": "child has rigid body languages",
+      "createdAt": "2026-05-01T06:25:17.147Z"
+    }
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "index": "001",
+  "folderName": "001",
+  "fileName": "video1.mp4",
+  "sourceType": "local-video",
+  "createdAt": "2026-05-01T06:24:28.143Z",
+  "durationSeconds": 60.033333,
+  "fileSizeBytes": 10685465,
+  "mimeType": "video/mp4",
+  "eventCount": 2,
+  "completedEventCount": 2,
+  "noteCount": 2,
+  "captionCount": 2,
+  "commentCount": 0,
+  "openEventId": null
+}

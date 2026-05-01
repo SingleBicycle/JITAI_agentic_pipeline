@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Autism Video Coder</title>
+    <link rel="stylesheet" href="./styles.css">
+  </head>
+  <body>
+    <main class="app-shell">
+      <aside class="workspace-panel">
+        <section class="panel folder-panel">
+          <p class="eyebrow">Local Video Coding</p>
+          <h1>Autism Video Coder</h1>
+          <button id="choose-folder-button" type="button">Choose Video Folder</button>
+          <p id="folder-status">No video folder selected</p>
+          <p id="save-status">Choose a folder to enable saving</p>
+        </section>
+
+        <section class="panel queue-panel">
+          <h2>Videos</h2>
+          <ul id="queue-list"></ul>
+        </section>
+      </aside>
+
+      <section class="panel player-panel">
+        <div class="status-row">
+          <p id="player-status">Choose a video folder to begin.</p>
+          <div class="transport-row">
+            <button id="previous-button" type="button">Previous</button>
+            <button id="next-button" type="button">Next</button>
+          </div>
+        </div>
+
+        <video id="video-element" controls></video>
+
+        <section class="coding-surface">
+          <div class="clip-controls">
+            <button id="start-clip-button" type="button" class="primary-action">Start Clip</button>
+            <button id="end-clip-button" type="button">End Clip</button>
+            <button id="clear-tag-button" type="button">Clear Tag</button>
+            <button id="undo-button" type="button">Undo Last</button>
+          </div>
+
+          <div id="tag-actions" class="tag-actions"></div>
+        </section>
+
+        <section class="notes-surface">
+          <h2>Human Notes</h2>
+          <div class="note-composer">
+            <select id="note-kind-select" aria-label="Note type"></select>
+            <textarea id="note-text-input" rows="3" placeholder="Caption, observation, or comment at current time"></textarea>
+            <div class="note-actions">
+              <button id="add-note-button" type="button" class="primary-action">Add Note</button>
+              <button id="erase-note-button" type="button">Undo Note</button>
+            </div>
+          </div>
+        </section>
+
+        <section class="timeline-section">
+          <h2>Progress Timeline</h2>
+          <div id="timeline" class="timeline"></div>
+        </section>
+
+        <section class="events-section">
+          <h2>Event Clips</h2>
+          <ul id="events-list"></ul>
+        </section>
+
+        <section class="notes-section">
+          <h2>Captions, Notes, Comments</h2>
+          <ul id="notes-list"></ul>
+        </section>
+      </section>
+    </main>
+
+    <script type="module" src="./src/main.js"></script>
+  </body>
+</html>

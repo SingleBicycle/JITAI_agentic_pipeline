@@ -1,0 +1,9 @@
+{
+  "name": "autism-video-coder",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "node --test",
+    "start": "python3 -m http.server 4174"
+  }
+}
