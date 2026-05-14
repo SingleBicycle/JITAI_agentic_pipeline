@@ -1,0 +1,65 @@
+demo:
+  name: privacy_behavior_vlm_eval_demo
+
+video:
+  sample_fps: 1.0
+  processing_width: 320
+  max_sampled_frames: 3600
+
+thumbnails:
+  enabled: true
+  width: 192
+  blur_faces: true
+  max_per_episode: 3
+
+segment:
+  mode: motion
+  min_window_seconds: 5.0
+  max_window_seconds: 20.0
+  target_window_seconds: 12.0
+  merge_gap_seconds: 3.0
+  motion_peak_std_factor: 0.6
+  min_motion_peak_score: 0.015
+  fixed_window_seconds: 12.0
+  max_segments: 30
+
+evidence:
+  audio:
+    enabled: true
+    ffmpeg_sample_rate: 16000
+    window_seconds: 1.0
+  people:
+    enable_detector: false
+    assume_dyadic_if_no_detector: true
+    default_count_if_detector_unavailable: 2
+  pose:
+    enabled: false
+  context:
+    scene_summary: indoor interaction setting
+    interaction_context: dyadic or small-group interaction
+    objects: []
+
+behavior_coding:
+  mode: vlm
+  vlm:
+    provider: openai
+    model: gpt-4o
+    env_key: OPENAI_API_KEY
+    base_url_env: OPENAI_BASE_URL
+    max_frames_per_episode: 4
+    image_width: 384
+    detail: low
+    max_tokens: 900
+    temperature: 0.0
+  llm:
+    enabled: false
+    provider: openai
+    model: gpt-4o-mini
+    env_key: OPENAI_API_KEY
+
+verifier:
+  missing_modality_low_confidence_threshold: 3
+  min_modalities_for_medium_confidence: 2
+
+report:
+  chain_merge_gap_seconds: 5.0

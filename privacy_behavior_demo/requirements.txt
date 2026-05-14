@@ -1,0 +1,5 @@
+numpy>=1.23
+opencv-python>=4.8
+openai>=1.40
+Pillow>=10.0
+PyYAML>=6.0
