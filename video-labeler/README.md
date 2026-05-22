@@ -2,7 +2,9 @@
 
 Video Labeler is a small browser tool for stepping through a queue of public video URLs and saving timestamped labeling output to a folder on your machine. It can import multiple links at once, play one video at a time, collect cue-access-response social interaction episodes, and write `index.csv`, `meta.json`, and `labels.json` as you work.
 
-![Video Labeler demo](./demo-assets/demo.png)
+![Video Labeler social interaction labeling demo](./demo-assets/demo.png)
+
+The demo above shows the current interaction episode workflow with video playback, cue/response timing fields, access labels, evidence spans, and optional episode notes.
 
 ## Quick Start
 
