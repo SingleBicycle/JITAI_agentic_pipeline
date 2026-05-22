@@ -29,7 +29,8 @@ body {
 
 button,
 input,
-textarea {
+textarea,
+select {
   font: inherit;
 }
 
@@ -66,15 +67,6 @@ textarea {
   flex-wrap: wrap;
 }
 
-.eyebrow {
-  margin: 0 0 6px;
-  color: var(--accent-strong);
-  font-size: 12px;
-  font-weight: 800;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-}
-
 h1,
 h2 {
   margin: 0;
@@ -104,7 +96,8 @@ textarea {
 }
 
 button,
-input[type="file"]::file-selector-button {
+input[type="file"]::file-selector-button,
+select {
   padding: 11px 16px;
   border: 1px solid var(--line);
   border-radius: 14px;
@@ -175,42 +168,100 @@ ul {
   border-radius: 18px;
 }
 
-.transport-row,
-.label-toolbar,
-.clip-description-row {
+.transport-row {
   display: flex;
   flex-wrap: wrap;
   gap: 10px;
   margin: 12px 0;
 }
 
-#capture-marker-button {
-  background: var(--accent);
-  color: white;
-  border-color: var(--accent);
+.interaction-editor {
+  margin-top: 18px;
+  padding-top: 18px;
+  border-top: 1px solid var(--line);
+}
+
+.section-heading-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.section-heading-row h2 {
+  margin-bottom: 0;
+}
+
+.time-grid,
+.interaction-grid {
+  display: grid;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.time-grid {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.interaction-grid {
+  grid-template-columns: repeat(4, minmax(150px, 1fr));
+}
+
+.interaction-editor label {
+  display: grid;
+  gap: 6px;
+  min-width: 0;
+  color: var(--muted);
+  font-size: 0.82rem;
   font-weight: 800;
   letter-spacing: 0.02em;
+  text-transform: uppercase;
 }
 
-.marker-actions {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-}
-
-.marker-actions button[data-marker-kind="erase"] {
-  background: var(--erase-soft);
-  border-color: #efb7b1;
-  color: var(--erase);
-}
-
-#clip-description-input {
-  flex: 1 1 180px;
-  min-width: 180px;
+.interaction-editor input,
+.interaction-editor select,
+.interaction-editor textarea {
+  width: 100%;
+  min-width: 0;
   padding: 10px 12px;
   border: 1px solid var(--line);
   border-radius: 14px;
   background: white;
+  color: var(--ink);
+  text-transform: none;
+  letter-spacing: 0;
+  font-size: 0.95rem;
+  font-weight: 500;
+}
+
+.time-control {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 6px;
+}
+
+.time-control button {
+  padding-inline: 12px;
+}
+
+.evidence-label textarea {
+  min-height: 72px;
+  margin-bottom: 0;
+  resize: vertical;
+}
+
+#save-interaction-button {
+  background: #226b57;
+  border-color: #226b57;
+  color: white;
+  font-weight: 800;
+}
+
+#erase-interaction-button {
+  background: var(--erase-soft);
+  border-color: #efb7b1;
+  color: var(--erase);
 }
 
 .history-panel {
@@ -234,7 +285,8 @@ ul {
 }
 
 .history-item,
-.clip-item {
+.clip-item,
+.interaction-item {
   padding: 10px 12px;
   border-radius: 14px;
   background: white;
@@ -265,6 +317,33 @@ ul {
   color: var(--muted);
 }
 
+.interaction-history {
+  grid-column: 1 / -1;
+}
+
+.interaction-item {
+  display: grid;
+  gap: 6px;
+}
+
+.interaction-main {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.interaction-main span,
+.interaction-detail {
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+.interaction-description {
+  color: var(--ink);
+  font-size: 0.95rem;
+}
+
 .empty-state,
 #player-status,
 #import-report,
@@ -286,6 +365,11 @@ ul {
   }
 
   .history-panel {
+    grid-template-columns: 1fr;
+  }
+
+  .time-grid,
+  .interaction-grid {
     grid-template-columns: 1fr;
   }
 }

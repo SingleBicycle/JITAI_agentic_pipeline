@@ -3,8 +3,7 @@ import {
   renderQueue,
   renderSaveStatus,
   renderImportReport,
-  renderMarkerHistory,
-  renderClipHistory
+  renderInteractionEpisodeHistory
 } from './ui/render.js';
 import {
   createSessionState,
@@ -12,13 +11,13 @@ import {
   selectVideo,
   getCurrentItem,
   selectRelativeVideo,
-  addMarkerForCurrentItem,
-  eraseLastForCurrentItem,
-  describeLastClipForCurrentItem
+  recordInteractionEpisodeForCurrentItem,
+  eraseInteractionEpisodeForCurrentItem
 } from './state/session.js';
 import { parseImportedText } from './lib/parser.js';
 import { appendIndexedUrls } from './lib/indexer.js';
 import { createStorageClient } from './lib/storage.js';
+import { buildMeta, buildLabelsPayload } from './lib/export-payloads.js';
 import { createPlayerController } from './player/create-player-controller.js';
 
 const state = createSessionState();
@@ -31,26 +30,38 @@ function nowIso() {
   return new Date().toISOString();
 }
 
-function hasOpenStartMarker(item) {
-  const closedStartIds = new Set(item.clips.map((clip) => clip.startMarkerId));
-  return item.markers.some((marker) => marker.kind === 'start' && !closedStartIds.has(marker.id));
+function renderCurrentItemHistories() {
+  const item = getCurrentItem(state);
+  renderInteractionEpisodeHistory(dom, item);
 }
 
-function buildMeta(item) {
-  return {
-    index: item.index,
-    folderName: item.folderName,
-    sourceUrl: item.sourceUrl,
-    sourceType: item.sourceType,
-    title: item.title,
-    titleSource: item.titleSource,
-    createdAt: item.createdAt,
-    durationSeconds: item.durationSeconds ?? null,
-    seekable: item.seekable ?? false,
-    clipCount: item.clips.length,
-    hasOpenStartMarker: hasOpenStartMarker(item),
-    capabilities: item.capabilities ?? { timing: false, duration: false }
-  };
+function setSelectOptions(select, options) {
+  select.innerHTML = options.map((option) => `
+    <option value="${option}">${option}</option>
+  `).join('');
+}
+
+function setCurrentTimeField(input) {
+  const currentTime = player.getCurrentTime();
+  if (currentTime == null) return false;
+  input.value = currentTime.toFixed(2);
+  return true;
+}
+
+function numericRange(startInput, endInput) {
+  if (!startInput.value || !endInput.value) return null;
+  return `${Number(startInput.value).toFixed(2)}-${Number(endInput.value).toFixed(2)}`;
+}
+
+function clearInteractionForm() {
+  dom.cueActorInput.value = '';
+  dom.candidateRecipientInput.value = '';
+  dom.cueStartInput.value = '';
+  dom.cueEndInput.value = '';
+  dom.responseStartInput.value = '';
+  dom.responseEndInput.value = '';
+  dom.evidenceSpansInput.value = '';
+  dom.episodeDescriptionInput.value = '';
 }
 
 async function persistState() {
@@ -70,10 +81,7 @@ async function persistState() {
         item,
         meta: buildMeta(item),
         labels: {
-          videoIndex: item.index,
-          sourceUrl: item.sourceUrl,
-          markers: item.markers,
-          clips: item.clips
+          ...buildLabelsPayload(item)
         }
       });
     }
@@ -90,8 +98,7 @@ async function loadCurrentItem() {
   const item = getCurrentItem(state);
   if (!item) {
     dom.playerStatus.textContent = 'No video selected';
-    renderMarkerHistory(dom, null);
-    renderClipHistory(dom, null);
+    renderInteractionEpisodeHistory(dom, null);
     return;
   }
 
@@ -108,8 +115,7 @@ async function loadCurrentItem() {
     : `Loaded ${item.index}, but timestamp capture is unavailable for this source`;
 
   renderQueue(dom, state);
-  renderMarkerHistory(dom, item);
-  renderClipHistory(dom, item);
+  renderCurrentItemHistories();
   await persistState();
 }
 
@@ -129,6 +135,7 @@ async function importUrlsFromText(rawText) {
     createdAt: nowIso(),
     markers: [],
     clips: [],
+    interactionEpisodes: [],
     title: '',
     titleSource: 'unknown'
   })));
@@ -174,68 +181,64 @@ dom.nextButton.addEventListener('click', async () => {
   await loadCurrentItem();
 });
 
-dom.captureMarkerButton.addEventListener('click', async () => {
-  const currentTime = player.getCurrentTime();
-  if (currentTime == null) return;
-
-  addMarkerForCurrentItem(state, {
-    id: `m${state.nextMarkerNumber++}`,
-    timestampSeconds: currentTime,
-    createdAt: nowIso(),
-    kind: 'marker'
+dom.timeCaptureButtons.forEach((button) => {
+  button.addEventListener('click', () => {
+    const input = document.querySelector(`#${button.dataset.timeTarget}`);
+    setCurrentTimeField(input);
   });
-
-  const item = getCurrentItem(state);
-  renderMarkerHistory(dom, item);
-  renderClipHistory(dom, item);
-  await persistState();
 });
 
-dom.markerActions.innerHTML = labelsConfig.defaults.map((label) => `
-  <button type="button" data-marker-kind="${label}">${label}</button>
-`).join('');
+dom.useCueResponseEvidenceButton.addEventListener('click', () => {
+  const spans = [
+    numericRange(dom.cueStartInput, dom.cueEndInput),
+    numericRange(dom.responseStartInput, dom.responseEndInput)
+  ].filter(Boolean);
+  dom.evidenceSpansInput.value = spans.join('; ');
+});
 
-dom.markerActions.addEventListener('click', async (event) => {
-  const button = event.target.closest('[data-marker-kind]');
-  if (!button) return;
-
-  const currentTime = player.getCurrentTime();
-  if (button.dataset.markerKind === 'erase') {
-    eraseLastForCurrentItem(state);
-  } else {
-    if (currentTime == null) return;
-    addMarkerForCurrentItem(state, {
-      id: `m${state.nextMarkerNumber++}`,
-      timestampSeconds: currentTime,
+dom.saveInteractionButton.addEventListener('click', async () => {
+  try {
+    recordInteractionEpisodeForCurrentItem(state, {
       createdAt: nowIso(),
-      kind: button.dataset.markerKind
+      cueStartSeconds: dom.cueStartInput.value,
+      cueEndSeconds: dom.cueEndInput.value,
+      cueActor: dom.cueActorInput.value,
+      candidateRecipient: dom.candidateRecipientInput.value,
+      cueType: dom.cueTypeSelect.value,
+      accessLabel: dom.accessLabelSelect.value,
+      responseLabel: dom.responseLabelSelect.value,
+      responseStartSeconds: dom.responseStartInput.value,
+      responseEndSeconds: dom.responseEndInput.value,
+      responseType: dom.responseTypeSelect.value,
+      cueResponseLink: dom.cueResponseLinkSelect.value,
+      evidenceSpansText: dom.evidenceSpansInput.value,
+      ambiguityLabel: dom.ambiguityLabelSelect.value,
+      description: dom.episodeDescriptionInput.value
     });
+    clearInteractionForm();
+    dom.playerStatus.textContent = 'Interaction episode saved';
+  } catch (error) {
+    dom.playerStatus.textContent = error instanceof Error ? error.message : String(error);
   }
 
-  const item = getCurrentItem(state);
-  renderMarkerHistory(dom, item);
-  renderClipHistory(dom, item);
+  renderCurrentItemHistories();
   await persistState();
 });
 
-dom.applyDescriptionButton.addEventListener('click', async () => {
-  const description = dom.clipDescriptionInput.value.trim();
-  if (!description) return;
-
-  const item = getCurrentItem(state);
-  if (!item?.clips.length) {
-    dom.playerStatus.textContent = 'Create a start/end clip before applying a description.';
-    return;
-  }
-
-  describeLastClipForCurrentItem(state, description);
-  dom.clipDescriptionInput.value = '';
-  renderClipHistory(dom, getCurrentItem(state));
+dom.eraseInteractionButton.addEventListener('click', async () => {
+  eraseInteractionEpisodeForCurrentItem(state);
+  renderCurrentItemHistories();
   await persistState();
 });
+
+setSelectOptions(dom.cueTypeSelect, labelsConfig.socialInteraction.cueTypes);
+setSelectOptions(dom.accessLabelSelect, labelsConfig.socialInteraction.accessLabels);
+setSelectOptions(dom.responseLabelSelect, labelsConfig.socialInteraction.responseLabels);
+setSelectOptions(dom.responseTypeSelect, labelsConfig.socialInteraction.responseTypes);
+setSelectOptions(dom.cueResponseLinkSelect, labelsConfig.socialInteraction.cueResponseLinks);
+setSelectOptions(dom.ambiguityLabelSelect, labelsConfig.socialInteraction.ambiguityLabels);
 
 renderQueue(dom, state);
 renderSaveStatus(dom, state);
-renderMarkerHistory(dom, null);
-renderClipHistory(dom, null);
+renderInteractionEpisodeHistory(dom, null);
 renderImportReport(dom, state);

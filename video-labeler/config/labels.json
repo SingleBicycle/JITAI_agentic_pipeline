@@ -1,3 +1,61 @@
 {
-  "defaults": ["start", "end", "erase"]
+  "defaults": ["start", "end", "erase"],
+  "socialInteraction": {
+    "cueTypes": [
+      "speech",
+      "gesture",
+      "speech_gesture",
+      "object_action",
+      "speech_object_action",
+      "gesture_object_action",
+      "speech_gesture_object_action",
+      "gaze_or_orientation",
+      "speech_gaze_or_orientation",
+      "gesture_gaze_or_orientation",
+      "object_action_gaze_or_orientation",
+      "touch",
+      "sound_or_vocalization",
+      "other"
+    ],
+    "accessLabels": [
+      "visible_and_audible",
+      "audible_only",
+      "visible_only",
+      "orientation_supports_access",
+      "orientation_unclear",
+      "occluded",
+      "offscreen",
+      "unknown",
+      "not_applicable"
+    ],
+    "responseLabels": [
+      "direct_response",
+      "possible_response",
+      "temporally_adjacent_behavior",
+      "no_observed_response",
+      "ambiguous_response"
+    ],
+    "responseTypes": [
+      "speech_response",
+      "gesture_response",
+      "object_action_response",
+      "gaze_or_orientation_response",
+      "movement_response",
+      "none",
+      "other"
+    ],
+    "cueResponseLinks": [
+      "linked",
+      "possible_link",
+      "temporal_only",
+      "no_observed_response",
+      "ambiguous"
+    ],
+    "ambiguityLabels": [
+      "low",
+      "medium",
+      "high",
+      "needs_review"
+    ]
+  }
 }

@@ -2,7 +2,9 @@ import {
   createMarker,
   applyMarkerAction,
   applyClipDescription,
-  applyLabelAction
+  applyLabelAction,
+  createInteractionEpisode,
+  applyInteractionEpisodeAction
 } from '../lib/labels.js';
 
 export function createSessionState() {
@@ -14,7 +16,8 @@ export function createSessionState() {
     importSummary: null,
     lastSaveError: null,
     nextMarkerNumber: 1,
-    nextClipNumber: 1
+    nextClipNumber: 1,
+    nextEpisodeNumber: 1
   };
 }
 
@@ -23,6 +26,7 @@ export function appendImportedUrls(state, items) {
     ...item,
     markers: item.markers ?? [],
     clips: item.clips ?? [],
+    interactionEpisodes: item.interactionEpisodes ?? [],
     title: item.title ?? '',
     titleSource: item.titleSource ?? 'unknown',
     labels: item.labels ?? []
@@ -74,6 +78,31 @@ export function describeLastClipForCurrentItem(state, description) {
   const item = getCurrentItem(state);
   if (!item) return;
   item.clips = applyClipDescription(item.clips, description);
+}
+
+export function recordInteractionEpisodeForCurrentItem(state, payload) {
+  const item = getCurrentItem(state);
+  if (!item) return;
+
+  item.interactionEpisodes = applyInteractionEpisodeAction(
+    item.interactionEpisodes,
+    {
+      episode: createInteractionEpisode({
+        ...payload,
+        id: `ie${state.nextEpisodeNumber++}`
+      })
+    }
+  );
+}
+
+export function eraseInteractionEpisodeForCurrentItem(state) {
+  const item = getCurrentItem(state);
+  if (!item) return;
+
+  item.interactionEpisodes = applyInteractionEpisodeAction(
+    item.interactionEpisodes,
+    { eraseLast: true }
+  );
 }
 
 export function recordLabelForCurrentItem(state, payload) {

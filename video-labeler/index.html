@@ -12,7 +12,6 @@
   <body>
     <main class="app-shell">
       <section class="panel import-panel">
-        <p class="eyebrow">Editorial Slate</p>
         <h1>Video Labeler</h1>
         <textarea id="link-input" placeholder="Paste one or many links"></textarea>
         <div class="row">
@@ -39,22 +38,92 @@
           <button id="previous-button">Previous</button>
           <button id="next-button">Next</button>
         </div>
-        <div class="label-toolbar">
-          <button id="capture-marker-button">mark</button>
-          <div id="marker-actions" class="marker-actions"></div>
-        </div>
-        <div class="clip-description-row">
-          <input id="clip-description-input" placeholder="Describe the latest completed clip">
-          <button id="apply-description-button">Apply Description</button>
-        </div>
-        <section class="history-panel">
-          <div class="history-group">
-            <h2>Markers</h2>
-            <ul id="markers-list"></ul>
+        <section class="interaction-editor" aria-labelledby="interaction-editor-heading">
+          <div class="section-heading-row">
+            <h2 id="interaction-editor-heading">Interaction Episode</h2>
+            <button id="erase-interaction-button" type="button">Erase Latest Episode</button>
           </div>
-          <div class="history-group">
-            <h2>Clips</h2>
-            <ul id="clips-list"></ul>
+          <div class="time-grid">
+            <label>
+              Cue Start
+              <span class="time-control">
+                <input id="cue-start-input" inputmode="decimal" placeholder="0.00">
+                <button type="button" data-time-target="cue-start-input">Set</button>
+              </span>
+            </label>
+            <label>
+              Cue End
+              <span class="time-control">
+                <input id="cue-end-input" inputmode="decimal" placeholder="0.00">
+                <button type="button" data-time-target="cue-end-input">Set</button>
+              </span>
+            </label>
+            <label>
+              Response Start
+              <span class="time-control">
+                <input id="response-start-input" inputmode="decimal" placeholder="0.00">
+                <button type="button" data-time-target="response-start-input">Set</button>
+              </span>
+            </label>
+            <label>
+              Response End
+              <span class="time-control">
+                <input id="response-end-input" inputmode="decimal" placeholder="0.00">
+                <button type="button" data-time-target="response-end-input">Set</button>
+              </span>
+            </label>
+          </div>
+          <div class="interaction-grid">
+            <label>
+              Cue Actor
+              <input id="cue-actor-input" placeholder="P1">
+            </label>
+            <label>
+              Candidate Recipient
+              <input id="candidate-recipient-input" placeholder="P2">
+            </label>
+            <label>
+              Cue Type
+              <select id="cue-type-select"></select>
+            </label>
+            <label>
+              Recipient Access
+              <select id="access-label-select"></select>
+            </label>
+            <label>
+              Response/No-Response Event
+              <select id="response-label-select"></select>
+            </label>
+            <label>
+              Response Type
+              <select id="response-type-select"></select>
+            </label>
+            <label>
+              Cue-Response Link
+              <select id="cue-response-link-select"></select>
+            </label>
+            <label>
+              Ambiguity
+              <select id="ambiguity-label-select"></select>
+            </label>
+          </div>
+          <label class="evidence-label">
+            Evidence Spans
+            <textarea id="evidence-spans-input" placeholder="13.20-14.80; 15.10-17.00"></textarea>
+          </label>
+          <label class="evidence-label">
+            Optional Description
+            <textarea id="episode-description-input" placeholder="Observable note for this episode"></textarea>
+          </label>
+          <div class="row">
+            <button id="use-cue-response-evidence-button" type="button">Use Cue/Response Spans</button>
+            <button id="save-interaction-button" type="button">Save Episode</button>
+          </div>
+        </section>
+        <section class="history-panel">
+          <div class="history-group interaction-history">
+            <h2>Interaction Episodes</h2>
+            <ul id="interaction-episodes-list"></ul>
           </div>
         </section>
       </section>
