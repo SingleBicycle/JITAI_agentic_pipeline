@@ -238,6 +238,21 @@ AVA_cache/custom/session_001/
 
 `jitai_timeline.json` contains per-window structured state estimates. `jitai_alerts.json` contains windows where the policy engine decided a caregiver-facing intervention suggestion should fire.
 
+## Video Labeler
+
+This repo also includes `video-labeler/`, a browser-based tool for importing public video URLs and saving cue-access-response social interaction labels with timestamps, access judgments, response/no-response events, evidence spans, and optional episode notes.
+
+![Video Labeler social interaction labeling demo](./video-labeler/demo-assets/demo.png)
+
+Run it from the `video-labeler/` folder:
+
+```bash
+npm test
+npm run start
+```
+
+Then open `http://localhost:4173` in Chrome or Edge. The labeler writes `index.csv`, `meta.json`, and `labels.json` to the selected output folder.
+
 
 ## 📄 Citation
 
