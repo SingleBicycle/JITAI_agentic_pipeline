@@ -1,0 +1,64 @@
+{
+  "videoIndex": "001",
+  "sourceUrl": "https://youtu.be/Fda0RZG9b0I?si=QEhCw9Qujr7sE41k",
+  "markers": [],
+  "clips": [],
+  "interactionEpisodes": [
+    {
+      "id": "ie1",
+      "createdAt": "2026-05-22T17:55:52.416Z",
+      "cueEvent": {
+        "startSeconds": 11.57,
+        "endSeconds": 12.68,
+        "actor": "P1",
+        "candidateRecipient": "P2",
+        "cueType": "object_action"
+      },
+      "recipientAccess": {
+        "recipient": "P2",
+        "accessLabel": "visible_and_audible"
+      },
+      "responseEvent": {
+        "label": "direct_response",
+        "startSeconds": 17.37,
+        "endSeconds": 18.96,
+        "responseType": "speech_response"
+      },
+      "cueResponseLink": {
+        "label": "linked",
+        "latencySeconds": 4.69
+      },
+      "evidenceSpans": [],
+      "ambiguityLabel": "low",
+      "description": ""
+    },
+    {
+      "id": "ie2",
+      "createdAt": "2026-05-22T18:00:42.491Z",
+      "cueEvent": {
+        "startSeconds": 49.27,
+        "endSeconds": 50.86,
+        "actor": "P1, P2",
+        "candidateRecipient": "P3",
+        "cueType": "object_action"
+      },
+      "recipientAccess": {
+        "recipient": "P3",
+        "accessLabel": "visible_and_audible"
+      },
+      "responseEvent": {
+        "label": "direct_response",
+        "startSeconds": 51.38,
+        "endSeconds": 54.76,
+        "responseType": "speech_response"
+      },
+      "cueResponseLink": {
+        "label": "linked",
+        "latencySeconds": 0.52
+      },
+      "evidenceSpans": [],
+      "ambiguityLabel": "low",
+      "description": ""
+    }
+  ]
+}

@@ -1,0 +1,18 @@
+{
+  "index": "001",
+  "folderName": "001",
+  "sourceUrl": "https://youtu.be/Fda0RZG9b0I?si=QEhCw9Qujr7sE41k",
+  "sourceType": "youtube",
+  "title": "Fda0RZG9b0I",
+  "titleSource": "filename",
+  "createdAt": "2026-05-22T17:45:17.578Z",
+  "durationSeconds": null,
+  "seekable": true,
+  "clipCount": 0,
+  "interactionEpisodeCount": 2,
+  "hasOpenStartMarker": false,
+  "capabilities": {
+    "timing": true,
+    "duration": true
+  }
+}

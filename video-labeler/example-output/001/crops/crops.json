@@ -1,0 +1,55 @@
+{
+  "labelFolder": "video-labeler/example-output/001",
+  "mediaSourceUsed": "video-labeler/example-output/001/source_Fda0RZG9b0I.mp4",
+  "labeledSourceUrl": "https://youtu.be/Fda0RZG9b0I?si=QEhCw9Qujr7sE41k",
+  "exports": [
+    {
+      "episodeId": "ie1",
+      "kind": "episode",
+      "startSeconds": 11.57,
+      "endSeconds": 18.96,
+      "durationSeconds": 7.39,
+      "file": "ie1_episode.mp4"
+    },
+    {
+      "episodeId": "ie1",
+      "kind": "cue",
+      "startSeconds": 11.57,
+      "endSeconds": 12.68,
+      "durationSeconds": 1.11,
+      "file": "ie1_cue.mp4"
+    },
+    {
+      "episodeId": "ie1",
+      "kind": "response",
+      "startSeconds": 17.37,
+      "endSeconds": 18.96,
+      "durationSeconds": 1.59,
+      "file": "ie1_response.mp4"
+    },
+    {
+      "episodeId": "ie2",
+      "kind": "episode",
+      "startSeconds": 49.27,
+      "endSeconds": 54.76,
+      "durationSeconds": 5.49,
+      "file": "ie2_episode.mp4"
+    },
+    {
+      "episodeId": "ie2",
+      "kind": "cue",
+      "startSeconds": 49.27,
+      "endSeconds": 50.86,
+      "durationSeconds": 1.59,
+      "file": "ie2_cue.mp4"
+    },
+    {
+      "episodeId": "ie2",
+      "kind": "response",
+      "startSeconds": 51.38,
+      "endSeconds": 54.76,
+      "durationSeconds": 3.38,
+      "file": "ie2_response.mp4"
+    }
+  ]
+}
